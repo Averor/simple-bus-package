@@ -3,19 +3,18 @@
 declare(strict_types=1);
 
 namespace Averor\SimpleBusPackage\Message;
-
 use DateTimeImmutable;
 use DateTimeInterface;
 use Ramsey\Uuid\Uuid;
 use ReflectionException;
 
 /**
- * Class AbstractMessage
+ * Trait MessageTrait
  *
  * @package Averor\SimpleBusPackage\Message
  * @author Averor <averor.dev@gmail.com>
  */
-abstract class AbstractMessage implements Message
+trait MessageTrait
 {
     /** @var string */
     protected $uuid;
@@ -49,7 +48,7 @@ abstract class AbstractMessage implements Message
     {
         $reflection = new \ReflectionClass(get_called_class());
 
-        /** @var AbstractMessage $message */
+        /** @var Message|MessageTrait $message */
         $message = $reflection->newInstanceWithoutConstructor();
 
         $message->uuid = $data['uuid'];
@@ -74,7 +73,7 @@ abstract class AbstractMessage implements Message
     /**
      * @return string
      */
-    public function uuid() : string
+    final public function uuid() : string
     {
         return $this->uuid;
     }
@@ -82,7 +81,7 @@ abstract class AbstractMessage implements Message
     /**
      * @return DateTimeInterface
      */
-    public function timestamp() : DateTimeInterface
+    final public function timestamp() : DateTimeInterface
     {
         return $this->timestamp;
     }
@@ -90,7 +89,7 @@ abstract class AbstractMessage implements Message
     /**
      * @return array
      */
-    public function payload() : array
+    final public function payload() : array
     {
         return $this->payload;
     }
