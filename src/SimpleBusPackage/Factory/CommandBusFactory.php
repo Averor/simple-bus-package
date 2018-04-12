@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Averor\SimpleBusPackage\Factory;
 
 use Averor\SimpleBusPackage\Bus\CommandBus;
+use Averor\SimpleBusPackage\Middleware\LoggingMiddleware;
 use Averor\SimpleBusPackage\Resolver\InvokableHandlerResolver;
 use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
 use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext;
 use SimpleBus\Message\CallableResolver\CallableMap;
 use SimpleBus\Message\Handler\DelegatesToMessageHandlerMiddleware;
 use SimpleBus\Message\Handler\Resolver\NameBasedMessageHandlerResolver;
-use SimpleBus\Message\Logging\LoggingMiddleware;
 use SimpleBus\Message\Name\ClassBasedNameResolver;
 
 /**
@@ -26,6 +25,7 @@ class CommandBusFactory
 {
     /**
      * @param array $map
+     * @param LoggerInterface|null $logger
      * @return MessageBus
      */
     public static function create(array $map, ?LoggerInterface $logger = null) : MessageBus
@@ -36,10 +36,7 @@ class CommandBusFactory
 
         if ($logger !== null) {
             $commandBus->appendMiddleware(
-                new LoggingMiddleware(
-                    $logger,
-                    LogLevel::DEBUG
-                )
+                new LoggingMiddleware($logger)
             );
         }
 

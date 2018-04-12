@@ -10,10 +10,18 @@ namespace Averor\SimpleBusPackage\Message;
  * @package Averor\SimpleBusPackage\Message
  * @author Averor <averor.dev@gmail.com>
  */
-class AbstractCommand implements Command
+abstract class AbstractCommand implements Command
 {
     /** @var array */
     protected $payload = [];
+
+    /**
+     * @return array
+     */
+    public function getPayload() : array
+    {
+        return $this->payload;
+    }
 
     /**
      * @param array $payload
