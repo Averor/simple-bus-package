@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Averor\SimpleBusPackage\Factory;
 
+use Averor\SimpleBusPackage\Bus\CommandBus;
 use Averor\SimpleBusPackage\Resolver\InvokableHandlerResolver;
 use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext;
-use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
 use SimpleBus\Message\CallableResolver\CallableMap;
 use SimpleBus\Message\Handler\DelegatesToMessageHandlerMiddleware;
 use SimpleBus\Message\Handler\Resolver\NameBasedMessageHandlerResolver;
@@ -27,7 +27,7 @@ class CommandBusFactory
      */
     public static function create(array $map) : MessageBus
     {
-        $commandBus = new MessageBusSupportingMiddleware([
+        $commandBus = new CommandBus([
             new FinishesHandlingMessageBeforeHandlingNext()
         ]);
 
