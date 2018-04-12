@@ -22,15 +22,15 @@ interface Message
     /**
      * @return string
      */
-    public function getId() : string;
+    public function getMessageId() : string;
 
     /**
      * @return DateTimeInterface
      */
-    public function getTimestamp() : DateTimeInterface;
+    public function getMessageTimestamp() : DateTimeInterface;
 
     /**
      * @return array
      */
-    public function getPayload() : array;
+    public function getMessagePayload() : array;
 }

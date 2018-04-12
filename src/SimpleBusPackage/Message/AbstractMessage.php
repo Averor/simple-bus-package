@@ -18,13 +18,13 @@ use ReflectionException;
 abstract class AbstractMessage implements Message
 {
     /** @var string */
-    protected $id;
+    protected $messageId;
 
     /** @var DateTimeInterface */
-    protected $timestamp;
+    protected $messageTimestamp;
 
     /** @var array */
-    protected $payload = [];
+    protected $messagePayload = [];
 
     /**
      * @param array $payload
@@ -32,9 +32,9 @@ abstract class AbstractMessage implements Message
      */
     public function __construct(array $payload = [])
     {
-        $this->id = Uuid::uuid4()->toString();
-        $this->timestamp = new DateTimeImmutable();
-        $this->setPayload($payload);
+        $this->messageId = Uuid::uuid4()->toString();
+        $this->messageTimestamp = new DateTimeImmutable();
+        $this->setMessagePayload($payload);
     }
 
     /**
@@ -52,9 +52,9 @@ abstract class AbstractMessage implements Message
         /** @var AbstractMessage $message */
         $message = $reflection->newInstanceWithoutConstructor();
 
-        $message->id = $data['id'];
-        $message->timestamp = new DateTimeImmutable($data['timestamp']);
-        $message->setPayload($data['payload']);
+        $message->messageId = $data['messageId'];
+        $message->messageTimestamp = new DateTimeImmutable($data['messageTimestamp']);
+        $message->setMessagePayload($data['payload']);
 
         return $message;
     }
@@ -65,42 +65,42 @@ abstract class AbstractMessage implements Message
     public function toArray() : array
     {
         return [
-            'id' => $this->getId(),
-            'timestamp' => $this->getTimestamp()->format(DateTimeImmutable::ISO8601),
-            'payload' => $this->getPayload()
+            'messageId' => $this->getMessageId(),
+            'messageTimestamp' => $this->getMessageTimestamp()->format(DateTimeImmutable::ISO8601),
+            'payload' => $this->getMessagePayload()
         ];
     }
 
     /**
      * @return string
      */
-    public function getId() : string
+    public function getMessageId() : string
     {
-        return $this->id;
+        return $this->messageId;
     }
 
     /**
      * @return DateTimeInterface
      */
-    public function getTimestamp() : DateTimeInterface
+    public function getMessageTimestamp() : DateTimeInterface
     {
-        return $this->timestamp;
+        return $this->messageTimestamp;
     }
 
     /**
      * @return array
      */
-    public function getPayload() : array
+    public function getMessagePayload() : array
     {
-        return $this->payload;
+        return $this->messagePayload;
     }
 
     /**
      * @param array $payload
      * @return void
      */
-    protected function setPayload(array $payload) : void
+    protected function setMessagePayload(array $payload) : void
     {
-        $this->payload = $payload;
+        $this->messagePayload = $payload;
     }
 }
