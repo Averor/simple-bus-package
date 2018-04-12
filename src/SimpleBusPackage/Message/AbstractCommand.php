@@ -16,6 +16,14 @@ abstract class AbstractCommand implements Command
     protected $payload = [];
 
     /**
+     * @param array $payload
+     */
+    public function __construct(array $payload = [])
+    {
+        $this->setPayload($payload);
+    }
+
+    /**
      * @return array
      */
     public function getPayload() : array
