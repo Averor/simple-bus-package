@@ -10,5 +10,5 @@ namespace Averor\SimpleBusPackage\Message;
  * @package Averor\SimpleBusPackage\Message
  * @author Averor <averor.dev@gmail.com>
  */
-abstract class AbstractCommand extends AbstractMessage
+abstract class AbstractCommand extends AbstractMessage implements Command
 {}

@@ -10,5 +10,5 @@ namespace Averor\SimpleBusPackage\Message;
  * @package Averor\SimpleBusPackage\Message
  * @author Averor <averor.dev@gmail.com>
  */
-class AbstractEvent extends AbstractMessage
+class AbstractEvent extends AbstractMessage implements Event
 {}
