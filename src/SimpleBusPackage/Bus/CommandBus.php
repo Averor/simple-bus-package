@@ -10,7 +10,7 @@ use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
  * Class CommandBus
  *
  * @package Averor\SimpleBusPackage\Bus
- * @author JurekT <jerzy.tuszynski@sprint.pl>
+ * @author Averor <averor.dev@gmail.com>
  */
 class CommandBus extends MessageBusSupportingMiddleware
 {}
