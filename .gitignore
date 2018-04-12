@@ -1,0 +1,7 @@
+nbproject
+.project
+.buildpath
+.settings
+.externalToolBuilders
+.idea
+/vendor/
