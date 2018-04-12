@@ -8,7 +8,7 @@ namespace Averor\SimpleBusPackage;
  * Interface EventListener
  *
  * @package Averor\SimpleBusPackage
- * @author JurekT <jerzy.tuszynski@sprint.pl>
+ * @author Averor <averor.dev@gmail.com>
  */
 interface EventListener
 {

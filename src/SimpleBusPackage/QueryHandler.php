@@ -8,7 +8,7 @@ namespace Averor\SimpleBusPackage;
  * Class QueryHandler
  *
  * @package Averor\SimpleBusPackage
- * @author JurekT <jerzy.tuszynski@sprint.pl>
+ * @author Averor <averor.dev@gmail.com>
  */
 class QueryHandler
 {

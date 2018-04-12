@@ -11,7 +11,7 @@ use SimpleBus\Message\CallableResolver\Exception\CouldNotResolveCallable;
  * Class InvokableHandlerResolver
  *
  * @package Averor\SimpleBusPackage\Resolver
- * @author JurekT <jerzy.tuszynski@sprint.pl>
+ * @author Averor <averor.dev@gmail.com>
  */
 class InvokableHandlerResolver implements CallableResolver
 {

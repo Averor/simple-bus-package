@@ -8,7 +8,7 @@ namespace Averor\SimpleBusPackage\Message;
  * Interface Query
  *
  * @package Averor\SimpleBusPackage\Message
- * @author JurekT <jerzy.tuszynski@sprint.pl>
+ * @author Averor <averor.dev@gmail.com>
  */
 interface Query
 {
