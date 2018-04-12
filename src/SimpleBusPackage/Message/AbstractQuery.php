@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Averor\SimpleBusPackage\Message;
 
 /**
- * Class AbstractCommand
+ * Class AbstractQuery
  *
  * @package Averor\SimpleBusPackage\Message
  * @author Averor <averor.dev@gmail.com>
  */
-abstract class AbstractCommand extends AbstractMessage
+class AbstractQuery extends AbstractMessage
 {}

@@ -11,7 +11,7 @@ use UnexpectedValueException;
  * Class MessageFactory
  *
  * @package Averor\SimpleBusPackage\Factory
- * @author JurekT <jerzy.tuszynski@sprint.pl>
+ * @author Averor <averor.dev@gmail.com>
  */
 class MessageFactory
 {
