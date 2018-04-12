@@ -21,24 +21,18 @@ use SimpleBus\Message\Name\ClassBasedNameResolver;
  */
 class CommandBusFactory
 {
-    public static function create(array $commandHandlersByCommandName) : MessageBus
+    /**
+     * @param array $map
+     * @return MessageBus
+     */
+    public static function create(array $map) : MessageBus
     {
         $commandBus = new MessageBusSupportingMiddleware([
             new FinishesHandlingMessageBeforeHandlingNext()
         ]);
 
-        // // Provide a service locator callable. It will be used to instantiate a handler service whenever requested.
-        // $serviceLocator = function ($serviceId) {
-        //     return $serviceId;
-        // };
-        //
-        // $commandHandlerMap = new CallableMap(
-        //     $commandHandlersByCommandName,
-        //     new ServiceLocatorAwareCallableResolver($serviceLocator)
-        // );
-
         $commandHandlerMap = new CallableMap(
-            $commandHandlersByCommandName,
+            $map,
             new InvokableHandlerResolver()
         );
 
