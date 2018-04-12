@@ -20,14 +20,11 @@ class LoggingMiddleware implements MessageBusMiddleware
     protected $logger;
 
     /**
-     * @var string
+     * @param LoggerInterface $logger
      */
-    protected $level;
-
-    public function __construct(LoggerInterface $logger, $level)
+    public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
-        $this->level = $level;
     }
 
     /**
