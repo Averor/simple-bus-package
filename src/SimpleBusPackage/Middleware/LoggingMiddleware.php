@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Averor\SimpleBusPackage\Middleware;
 
 use Averor\SimpleBusPackage\Message\Command;
+use Averor\SimpleBusPackage\Message\Message;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
@@ -28,7 +29,7 @@ class LoggingMiddleware implements MessageBusMiddleware
     }
 
     /**
-     * @param object $message
+     * @param Message $message
      * @param callable $next
      * @return void
      * @throws \Throwable
@@ -38,10 +39,17 @@ class LoggingMiddleware implements MessageBusMiddleware
         if ($message instanceof Command) {
             $this->logger->info(
                 sprintf(
-                    "Command '%s' dispatched",
-                    get_class($message)
+                    "Command %s [%s] dispatched",
+                    get_class($message),
+                    $message->getId()
                 ),
-                ['message' => $message]
+                [
+                    'message' => [
+                        'id' => $message->getId(),
+                        'timestamp' => $message->getTimestamp(),
+                        'payload' => $message->getPayload()
+                    ]
+                ]
             );
         }
 
@@ -52,8 +60,9 @@ class LoggingMiddleware implements MessageBusMiddleware
             if ($message instanceof Command) {
                 $this->logger->info(
                     sprintf(
-                        "Command '%s' handled",
-                        get_class($message)
+                        "Command %s [%s] handled",
+                        get_class($message),
+                        $message->getId()
                     ),
                     []
                 );
@@ -62,10 +71,11 @@ class LoggingMiddleware implements MessageBusMiddleware
         } catch (\Throwable $e) {
 
             if ($message instanceof Command) {
-                $this->logger->info(
+                $this->logger->error(
                     sprintf(
-                        "Exception during handling command '%s'",
-                        get_class($message)
+                        "Exception during handling command %s [%s]",
+                        get_class($message),
+                        $message->getId()
                     ),
                     ['exception' => $e]
                 );
