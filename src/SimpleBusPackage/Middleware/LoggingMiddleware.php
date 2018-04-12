@@ -41,13 +41,13 @@ class LoggingMiddleware implements MessageBusMiddleware
                 sprintf(
                     "Command %s [%s] dispatched",
                     get_class($message),
-                    $message->getId()
+                    $message->uuid()
                 ),
                 [
                     'message' => [
-                        'id' => $message->getId(),
-                        'timestamp' => $message->getTimestamp(),
-                        'payload' => $message->getPayload()
+                        'id' => $message->uuid(),
+                        'timestamp' => $message->timestamp(),
+                        'payload' => $message->payload()
                     ]
                 ]
             );
@@ -62,7 +62,7 @@ class LoggingMiddleware implements MessageBusMiddleware
                     sprintf(
                         "Command %s [%s] handled",
                         get_class($message),
-                        $message->getId()
+                        $message->uuid()
                     ),
                     []
                 );
@@ -75,7 +75,7 @@ class LoggingMiddleware implements MessageBusMiddleware
                     sprintf(
                         "Exception during handling command %s [%s]",
                         get_class($message),
-                        $message->getId()
+                        $message->uuid()
                     ),
                     ['exception' => $e]
                 );
