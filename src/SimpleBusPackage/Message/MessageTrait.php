@@ -112,6 +112,14 @@ trait MessageTrait
     }
 
     /**
+     * @return array
+     */
+    public function jsonSerialize() : array
+    {
+        return $this->toArray();
+    }
+
+    /**
      * @param array $payload
      * @return void
      */

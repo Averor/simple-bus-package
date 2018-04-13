@@ -44,11 +44,7 @@ class LoggingMiddleware implements MessageBusMiddleware
                     $message->uuid()
                 ),
                 [
-                    'messagedata' => [
-                        'id' => $message->uuid(),
-                        'timestamp' => $message->timestamp(),
-                        'payload' => $message->payload()
-                    ]
+                    'message' => json_encode($message, JSON_FORCE_OBJECT)
                 ]
             );
         }
