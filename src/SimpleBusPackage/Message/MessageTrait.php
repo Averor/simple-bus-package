@@ -82,7 +82,7 @@ trait MessageTrait
         return [
             'name' => get_class($this),
             'uuid' => $this->uuid(),
-            'timestamp' => $this->timestamp()->format(DateTimeImmutable::ISO8601),
+            'timestamp' => $this->timestamp()->format(DateTimeInterface::ISO8601),
             'payload' => $this->payload()
         ];
     }
