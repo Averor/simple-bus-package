@@ -84,7 +84,7 @@ trait MessageTrait
             'name' => get_class($this),
             'uuid' => $this->uuid(),
             'timestamp' => $this->timestamp()->format(DateTime::ATOM),
-            'payload' => $this->payload()
+            'payload' => $this->serializePayload()
         ];
     }
 
@@ -115,9 +115,21 @@ trait MessageTrait
     /**
      * @return array
      */
-    public function jsonSerialize() : array
+    final public function jsonSerialize() : array
     {
         return $this->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    final protected function serializePayload() : array
+    {
+        if ($this instanceof SensitiveDataPayloadMessage) {
+            return $this->serializeSensitiveDataPayload();
+        }
+
+        return $this->payload();
     }
 
     /**

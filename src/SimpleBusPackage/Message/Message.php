@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Averor\SimpleBusPackage\Message;
 
 use DateTimeInterface;
-use JsonSerializable;
 
 /**
  * Interface Message
@@ -13,7 +12,7 @@ use JsonSerializable;
  * @package Averor\SimpleBusPackage\Message
  * @author Averor <averor.dev@gmail.com>
  */
-interface Message extends JsonSerializable
+interface Message
 {
     /**
      * @param array $payload
