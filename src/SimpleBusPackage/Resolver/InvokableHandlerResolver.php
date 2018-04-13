@@ -22,6 +22,8 @@ class InvokableHandlerResolver implements CallableResolver
      */
     public function resolve($maybeCallable)
     {
-        return (new $maybeCallable());
+        if (is_callable($maybeCallable)) {
+            return (new $maybeCallable());
+        }
     }
 }

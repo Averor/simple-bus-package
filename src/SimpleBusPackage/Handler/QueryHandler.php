@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Averor\SimpleBusPackage\Handler;
 
 /**
- * Class QueryHandler
+ * Interface QueryHandler
  *
  * @package Averor\SimpleBusPackage\Handler
  * @author Averor <averor.dev@gmail.com>
  */
-class QueryHandler
-{
-
-}
+interface QueryHandler
+{}

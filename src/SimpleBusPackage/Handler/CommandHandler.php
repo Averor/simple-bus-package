@@ -11,6 +11,4 @@ namespace Averor\SimpleBusPackage\Handler;
  * @author Averor <averor.dev@gmail.com>
  */
 interface CommandHandler
-{
-
-}
+{}

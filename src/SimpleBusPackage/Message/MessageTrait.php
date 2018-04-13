@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace Averor\SimpleBusPackage\Message;
+
 use DateTimeImmutable;
 use DateTimeInterface;
 use Ramsey\Uuid\Uuid;
