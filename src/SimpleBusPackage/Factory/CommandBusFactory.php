@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Averor\SimpleBusPackage\Factory;
 
 use Averor\SimpleBusPackage\Bus\CommandBus;
+use Averor\SimpleBusPackage\Middleware\CommandExceptionHandlingMiddleware;
 use Averor\SimpleBusPackage\Middleware\LoggingMiddleware;
 use Averor\SimpleBusPackage\Resolver\InvokableHandlerResolver;
 use Psr\Log\LoggerInterface;
@@ -31,6 +32,7 @@ class CommandBusFactory
     public static function create(array $map, ?LoggerInterface $logger = null) : MessageBus
     {
         $commandBus = new CommandBus([
+            new CommandExceptionHandlingMiddleware(), // !!!
             new FinishesHandlingMessageBeforeHandlingNext()
         ]);
 
