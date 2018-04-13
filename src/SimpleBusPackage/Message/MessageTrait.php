@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Averor\SimpleBusPackage\Message;
 
+use Assert\Assert;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Ramsey\Uuid\Uuid;
@@ -30,7 +31,7 @@ trait MessageTrait
      * @param array $payload
      * @throws \Exception
      */
-    public function __construct(array $payload = [])
+    final public function __construct(array $payload = [])
     {
         $this->uuid = Uuid::uuid4()->toString();
         $this->timestamp = new DateTimeImmutable();
@@ -42,19 +43,33 @@ trait MessageTrait
      * @return Message
      * @throws ReflectionException
      * @throws \Exception
-     *
-     * @todo $data array validation
      */
-    public static function restore(array $data) : Message
+    final public static function restore(array $data) : Message
     {
-        $reflection = new \ReflectionClass(get_called_class());
+        Assert::that($data)
+            ->keyExists('uuid', 'Key: uuid does not exist in message data array')
+            ->keyExists('timestamp', 'Key: timestamp does not exist in message data array')
+            ->keyExists('payload', 'Key: payload does not exist in message data array');
+
+        Assert::that($data['uuid'], 'Value under key: uuid is not valid UUID')
+            ->string()
+            ->uuid();
+
+        Assert::that($data['timestamp'], 'Value under key: timestamp is not valid ISO8601 date string')
+            ->string()
+            ->date(\DateTime::ISO8601);
+
+        Assert::that($data['payload'], 'Value under key: payload is not valid array')
+            ->isArray();
+
+        $reflection = new \ReflectionClass(static::class);
 
         /** @var Message|MessageTrait $message */
         $message = $reflection->newInstanceWithoutConstructor();
 
         $message->uuid = $data['uuid'];
         $message->timestamp = new DateTimeImmutable($data['timestamp']);
-        $message->setPayload($data['payload']);
+        $message->payload = $data['payload'];
 
         return $message;
     }
@@ -62,9 +77,10 @@ trait MessageTrait
     /**
      * @return array
      */
-    public function toArray() : array
+    final public function toArray() : array
     {
         return [
+            'name' => get_class($this),
             'uuid' => $this->uuid(),
             'timestamp' => $this->timestamp()->format(DateTimeImmutable::ISO8601),
             'payload' => $this->payload()

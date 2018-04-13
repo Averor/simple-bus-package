@@ -5,6 +5,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.1",
+        "beberlei/assert": "^2.9",
         "simple-bus/message-bus": "~3.0",
         "psr/log": "^1.0",
         "ramsey/uuid": "^3.7"
