@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Averor\SimpleBusPackage\Message;
 
 use Assert\Assert;
+use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Ramsey\Uuid\Uuid;
@@ -57,7 +58,7 @@ trait MessageTrait
 
         Assert::that($data['timestamp'], 'Value under key: timestamp is not valid ISO8601 date string')
             ->string()
-            ->date(\DateTime::ISO8601);
+            ->date(DateTime::ATOM);
 
         Assert::that($data['payload'], 'Value under key: payload is not valid array')
             ->isArray();
@@ -82,7 +83,7 @@ trait MessageTrait
         return [
             'name' => get_class($this),
             'uuid' => $this->uuid(),
-            'timestamp' => $this->timestamp()->format(DateTimeInterface::ISO8601),
+            'timestamp' => $this->timestamp()->format(DateTime::ATOM),
             'payload' => $this->payload()
         ];
     }
