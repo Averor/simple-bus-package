@@ -99,8 +99,5 @@ trait MessageTrait
      * @param array $payload
      * @return void
      */
-    protected function setPayload(array $payload) : void
-    {
-        $this->payload = $payload;
-    }
+    abstract protected function setPayload(array $payload) : void;
 }
